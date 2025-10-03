@@ -1,79 +1,14 @@
 import { defineConfig } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
-import { storyblok } from '@storyblok/astro'
-import { loadEnv } from 'vite'
+import mdx from '@astrojs/mdx'
 import mkcert from 'vite-plugin-mkcert'
-import netlify from '@astrojs/netlify'
-
-const env = loadEnv('', process.cwd(), 'STORYBLOK')
-
-let is_preview = env.STORYBLOK_IS_PREVIEW === 'yes'
-let output
-let adapter
-
-// local dev
-if (import.meta.env.DEV) {
-  output = "server"
-  adapter = undefined
-}
-
-// local build
-else if (env.STORYBLOK_ENVIRONMENT === 'development') {
-  output = "static"
-  adapter = undefined
-  is_preview = false
-}
-
-// cloud
-else {
-  adapter = is_preview ? netlify() : undefined
-  output = is_preview ? "server" : "static"
-}
 
 export default defineConfig({
-  output: output,
-  adapter: adapter,
+  output: "static",
 
   integrations: [
-    storyblok({
-      accessToken: env.STORYBLOK_TOKEN,
-      bridge: {
-        resolveRelations: ['reports_section.reports'],
-      },
-      enableFallbackComponent: true,
-      livePreview: is_preview,
-      apiOptions: {
-        region: 'eu',
-      },
-      components: {
-        page: 'storyblok/Page',
-        button: 'storyblok/Button',
-        heading: 'storyblok/Heading',
-        partners_section: 'storyblok/PartnersSection',
-        hero: 'storyblok/Hero',
-        banner_split: 'storyblok/BannerSplit',
-        features_section: 'storyblok/FeaturesSection',
-        stats_section: 'storyblok/StatsSection',
-        reports_section: 'storyblok/ReportsSection',
-        reports_list: 'storyblok/ReportsList',
-        report: 'storyblok/Report',
-        team_section: 'storyblok/TeamSection',
-        testimonials_section: 'storyblok/TestimonialsSection',
-        advisers_section: 'storyblok/AdvisersSection',
-        banner_cta: 'storyblok/BannerCta',
-        site_settings: 'storyblok/siteSettings',
-      },
-    }),
+    mdx(),
   ],
-
-  image: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.storyblok.com',
-      },
-    ],
-  },
 
   vite: {
     plugins: [

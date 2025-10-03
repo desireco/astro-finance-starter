@@ -1,0 +1,22 @@
+---
+import Button from '../Button.astro'
+const { headline, description, buttonText, buttonUrl } = Astro.props
+---
+
+<section class="bg-primary">
+  <div class="container mx-auto px-6 py-24 flex flex-col items-center text-center gap-8">
+    <h2 class="text-white text-3xl md:text-5xl leading-[120%] font-adamina max-w-[600px]">
+      {headline}
+    </h2>
+    {description && (
+      <p class="text-white text-lg max-w-[500px] opacity-90">
+        {description}
+      </p>
+    )}
+    {buttonText && buttonUrl && (
+      <Button href={buttonUrl} classes="button--white">
+        {buttonText}
+      </Button>
+    )}
+  </div>
+</section>

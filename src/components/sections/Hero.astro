@@ -1,0 +1,50 @@
+---
+import Button from '../Button.astro'
+const { headline, lead, image, buttonText, buttonUrl } = Astro.props
+---
+
+<section class="group" data-posthog>
+  <div class="relative min-h-[82vh] flex items-end pt-40 before:absolute before:inset-0 before:bg-black/55 before:mix-blend-multiply before:z-10">
+    <picture class="absolute z-0 w-full h-full object-cover object-top">
+      <source
+        srcset={`${image}?w=640&h=685`}
+        media="(max-width: 640px)"
+      />
+      <source
+        srcset={`${image}?w=1024&h=685`}
+        media="(max-width: 1024px)"
+      />
+      <source
+        srcset={`${image}?w=1440&h=685`}
+        media="(max-width: 1440px)"
+      />
+      <img
+        src={`${image}?w=1440&h=685`}
+        alt={headline}
+        class="absolute z-0 w-full h-full object-cover object-top"
+      />
+    </picture>
+
+    <div class="relative z-20 w-full pt-10">
+      <div class="max-w-[624px] mx-auto mb-28 px-6 flex flex-col gap-y-8 justify-center items-center">
+        <div class="max-w-[624px] text-center">
+          <h2 class="text-white text-3xl md:text-5xl leading-[110%] -tracking-[1.92px] font-adamina mb-4">
+            {headline}
+          </h2>
+
+          {lead && (
+            <p class="text-white leading-[150%] -tracking-[0.32px]">
+              {lead}
+            </p>
+          )}
+        </div>
+
+        {buttonText && buttonUrl && (
+          <Button href={buttonUrl} classes="cta-button">
+            {buttonText}
+          </Button>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
