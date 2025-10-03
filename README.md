@@ -1,44 +1,22 @@
 # Financial Starter: Multilingual Website Template
 
-![Financial Template Preview](https://a.storyblok.com/f/286134095425736/1920x1080/8a2b82127e/template-image.png)
-
 A high-performance website starter template built for financial teams to launch new brands, products, or campaigns quickly and efficiently.
 
-This template is powered by a modern, headless stack: Astro, Storyblok, Netlify, and PostHog. Together, they provide a flexible, scalable solution with intuitive content management and powerful marketing features like A/B testing.
-
-## Demo
-- ✨ [Live Demo](https://astro-storyblok-finance-starter.netlify.app/)
-- 💨 [PageSpeed Insights Report](https://pagespeed.web.dev/analysis/https-astro-storyblok-template-netlify-app/04ge88qxbi?form_factor=desktop)
-- 🍿 [Watch Demo on YouTube](https://www.youtube.com/watch?v=2hPhwubis7Q)
-- 🆎 [A/B testing with PostHog](https://posthog-finance-starter.netlify.app/)
-  - [Check out its branch](https://github.com/bejamas/astro-storyblok-finance-starter/tree/with-posthog-ab-testing)
+This template is powered by a modern stack: Astro, MDX, Tailwind CSS, and optional PostHog for analytics. Content is managed through files in your repository, making it fast, secure, and easy to version control.
 
 ## Tech Stack
 - Astro
-- Storyblok
-- Netlify
-- PostHog
+- MDX for content
 - Tailwind v4
+- PostHog (optional)
 
 ## Features
-- ✅ Modular Content Model – Hero, features, stats, testimonials, and more
+- ✅ File-based Content Management – MDX files and JSON data
 - ✅ Financial Reports – Built-in report content type + report list page
-- ✅ Multilingual by Default – Easy language switching with optional AI translation
-- ✅ Visual Editing – Storyblok’s live preview & block-based approach
+- ✅ Multilingual by Default – Easy language switching
 - ✅ SEO Ready – Metadata fields on every page
 - ✅ Optimized Performance – Static output, responsive images, Core Web Vitals ready
-- ✅ A/B Testing – Integrated with PostHog for experiments
-
-
-## Quick Start
-1. Create a Storyblok account and a new Space
-2. Clone Storyblok Space (using the button below)
-3. Fork this repo
-4. Create your project on Netlify
-5. Set up environment variables (see below)
-6. Deploy!
-
-[![Clone Storyblok Space](https://a.storyblok.com/f/286134095425736/208x35/7a54d39bad/clone-button.svg)](https://storyblok-space-cloner.netlify.app/)
+- ✅ A/B Testing – Integrated with PostHog (optional)
 
 ## Local Setup
 
@@ -72,53 +50,173 @@ npm run build
 npm run preview
 ```
 
-## Content Structure
+## Quick Start
 
-### Pages
-Pages are stored in `src/content/pages/` organized by language:
+### Prerequisites
+- Node.js (v18 or higher)
+
+### Getting Started
+```bash
+# Clone the repository
+git clone [your-repo-url]
+cd astro-finance-starter
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+## Content Management
+
+This template uses a file-based content system. All content is stored in your repository as MDX and JSON files.
+
+### 📁 Where Content Lives
+
+#### Pages
+Location: `src/content/pages/`
 - `src/content/pages/en/` - English pages
 - `src/content/pages/es/` - Spanish pages
 
-Each page is an MDX file that can import and use Astro components.
+**Example: Home page**
+```
+src/content/pages/en/home.mdx
+```
 
-### Reports
-Reports are stored in `src/content/reports/` organized by language:
+#### Financial Reports
+Location: `src/content/reports/`
 - `src/content/reports/en/` - English reports
 - `src/content/reports/es/` - Spanish reports
 
-### Site Settings
-Site-wide settings are in `src/data/` organized by language:
-- `src/data/en/site-settings.json` - English site settings (logo, navigation, etc.)
+**Example: Q4 Report**
+```
+src/content/reports/en/q4-2024.mdx
+```
+
+#### Site Settings
+Location: `src/data/`
+- `src/data/en/site-settings.json` - English site settings (logo, navigation, company info)
 - `src/data/es/site-settings.json` - Spanish site settings
 - `src/data/colors.json` - Theme colors
 - `src/data/languages.json` - Supported languages
 
-## Adding Content
+#### Images
+Location: `public/`
+- All images (hero, features, testimonials, reports) are stored in the public folder
 
-### Adding a New Page
-1. Create an MDX file in `src/content/pages/en/` (and `es/` for Spanish)
-2. Add frontmatter with title, description, language, and metadata
+### ✏️ How to Update Content
+
+#### Update a Page
+1. Open the MDX file in `src/content/pages/{language}/`
+2. Edit the content and frontmatter
+3. Save - changes appear immediately in development
+
+#### Add a New Page
+1. Create a new MDX file in `src/content/pages/{language}/`
+2. Add frontmatter:
+   ```mdx
+   ---
+   title: "Page Title"
+   description: "Page description"
+   language: en
+   metatags:
+     title: "SEO Title"
+     description: "SEO Description"
+   ---
+   ```
 3. Import and use components in the MDX content
 4. The page will automatically be generated at build time
 
-### Adding a New Report
-1. Create an MDX file in `src/content/reports/en/` (and `es/` for Spanish)
-2. Add frontmatter with title, description, author, date, and image
+#### Add a New Report
+1. Create a new MDX file in `src/content/reports/{language}/`
+2. Add frontmatter:
+   ```mdx
+   ---
+   title: "Report Title"
+   description: "Report description"
+   author: "Author Name"
+   date: "2024-01-01"
+   language: en
+   image:
+     src: "/report-image.jpg"
+     alt: "Report cover"
+   ---
+   ```
 3. Write your report content in MDX
 4. The report will be available at `/report/{slug}`
 
-### Modifying Navigation
-Edit the navigation array in `src/data/{language}/site-settings.json`
+#### Update Navigation
+Edit the navigation array in `src/data/{language}/site-settings.json`:
+```json
+{
+  "navigation": [
+    {
+      "label": "Home",
+      "url": "/"
+    },
+    {
+      "label": "New Page",
+      "url": "/new-page"
+    }
+  ]
+}
+```
 
-## Multilingual Support
+#### Update Company Information
+Edit the company details in `src/data/{language}/site-settings.json`:
+```json
+{
+  "company_description": "Your company description",
+  "phone": "+1 (555) 123-4567",
+  "email": "contact@yourcompany.com"
+}
+```
 
-This template supports multiple languages out of the box. To add a new language:
+#### Add Images
+1. Place images in the `public/` folder
+2. Reference them in your MDX files: `/your-image.jpg`
+3. For reports, specify the image path in frontmatter
 
-1. Add the language code to `src/data/languages.json`
-2. Create site settings file: `src/data/{lang}/site-settings.json`
-3. Add translations to `src/locales/{lang}.json`
-4. Add language flag SVG to `src/utils/i18n.js`
-5. Create content in `src/content/pages/{lang}/` and `src/content/reports/{lang}/`
+### 🌐 Multilingual Support
+
+The template supports multiple languages. To add a new language:
+
+1. **Add language to config**: Edit `src/data/languages.json`
+2. **Create site settings**: Add `src/data/{lang}/site-settings.json`
+3. **Add translations**: Create `src/locales/{lang}.json`
+4. **Add content**: Create pages in `src/content/pages/{lang}/` and `src/content/reports/{lang}/`
+
+## Available Scripts
+```bash
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## Deployment
+
+The site is fully static and can be deployed to any hosting service:
+- Netlify
+- Vercel
+- GitHub Pages
+- Any static hosting service
+
+No special server requirements or environment variables needed (except optional PostHog token).
+
+## Benefits of File-Based Content
+
+- ✅ **Fast & Secure** - No external API calls during build
+- ✅ **Version Control** - Content changes tracked in Git
+- ✅ **Developer Friendly** - Edit content in your favorite code editor
+- ✅ **No Costs** - No CMS subscription fees
+- ✅ **Portable** - Content moves with your code
+- ✅ **Type-Safe** - Content validation with TypeScript/Zod
 
 ## Contributing
 Contributions are welcome!
