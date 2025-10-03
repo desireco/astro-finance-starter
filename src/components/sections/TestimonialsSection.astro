@@ -1,0 +1,31 @@
+---
+const { title, testimonials } = Astro.props
+---
+
+<section class="bg-white">
+  <div class="container mx-auto px-6 py-24">
+    {title && <h2 class="text-black text-3xl md:text-5xl leading-[120%] font-adamina mb-16 text-center">{title}</h2>}
+
+    <ul class="grid md:grid-cols-2 gap-8">
+      {testimonials && testimonials.map((testimonial) => (
+        <li class="bg-background p-8 rounded-lg">
+          <p class="text-black text-lg mb-6 italic">"{testimonial.text}"</p>
+          <div class="flex items-center gap-4">
+            {testimonial.image && (
+              <img
+                src={testimonial.image}
+                alt={testimonial.author}
+                class="w-12 h-12 rounded-full object-cover"
+                loading="lazy"
+              />
+            )}
+            <div>
+              <div class="text-black font-medium">{testimonial.author}</div>
+              <div class="text-black opacity-65 text-sm">{testimonial.role}</div>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

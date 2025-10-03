@@ -1,94 +1,60 @@
-import { useStoryblokApi } from '@storyblok/astro'
-import isPreview from './isPreview'
+import { getCollection } from 'astro:content'
 
-export async function getStory(slug = 'home', language) {
-  const storyblokApi = useStoryblokApi()
-
+export async function getPageContent(slug = 'home', language) {
   try {
-    const { data } = await storyblokApi.get(
-      `cdn/stories/${slug}`,
-      {
-        version: isPreview() ? 'draft' : 'published',
-        resolve_relations: ['reports_section.reports'],
-        language,
-      }
-    )
-    return data.story
+    const pages = await getCollection('pages', ({ id, data }) => {
+      return data.language === language && id.includes(slug)
+    })
+    return pages.length > 0 ? pages[0] : null
   } catch (error) {
-    console.error(`Error fetching story with slug '${slug}':`, error)
+    console.error(`Error fetching page with slug '${slug}':`, error)
     return null
   }
 }
 
-export async function getLinks() {
-  const storyblokApi = useStoryblokApi()
-
+export async function getPages() {
   try {
-    const links = await storyblokApi.getAll('cdn/links', {
-      version: isPreview() ? 'draft' : 'published',
-    })
-    return links
+    const pages = await getCollection('pages')
+    return pages
   } catch (error) {
-    console.error(`Error fetching links:`, error)
-    return null
+    console.error('Error fetching pages:', error)
+    return []
   }
 }
 
 export async function getSiteSettings(language) {
-  const storyblokApi = useStoryblokApi()
-
   try {
-    const { data } = await storyblokApi.get(
-      `cdn/stories/settings/site-settings/`,
-      {
-        version: isPreview() ? 'draft' : 'published',
-        language,
-      }
-    )
-    return data.story
+    const settings = await import(`../data/${language}/site-settings.json`)
+    return settings.default || settings
   } catch (error) {
-    console.error('Error fetching site settings:', error)
-    return null
+    console.error(`Error fetching site settings for language '${language}':`, error)
+    // Fallback to English
+    try {
+      const settings = await import('../data/en/site-settings.json')
+      return settings.default || settings
+    } catch (fallbackError) {
+      console.error('Error fetching fallback site settings:', fallbackError)
+      return null
+    }
   }
 }
 
 export async function getDatasource(slug) {
-  const storyblokApi = useStoryblokApi()
-
   try {
-    const { data } = await storyblokApi.get('cdn/datasource_entries', {
-      datasource: slug,
-      version: isPreview() ? 'draft' : 'published',
-    })
-
-    if (!data.datasource_entries || !Array.isArray(data.datasource_entries)) {
-      console.error(`Storyblok datasource entries for '${slug}' not found or malformed.`)
-      return {}
-    }
-
-    const colorMap = data.datasource_entries.reduce((acc, entry) => {
-      acc[entry.name] = entry.value
-      return acc
-    }, {})
-
-    return colorMap
+    const datasource = await import(`../data/${slug}.json`)
+    return datasource.default || datasource
   } catch (error) {
-    console.error(`Error fetching Storyblok datasource '${slug}':`, error)
+    console.error(`Error fetching datasource '${slug}':`, error)
     return {}
   }
 }
 
 export async function getReportList(language) {
-  const storyblokApi = useStoryblokApi()
-
   try {
-    const { data } = await storyblokApi.get(`cdn/stories`, {
-      version: isPreview() ? 'draft' : 'published',
-      starts_with: 'report/',
-      is_startpage: false,
-      language,
+    const reports = await getCollection('reports', ({ data }) => {
+      return data.language === language
     })
-    return data.stories
+    return reports
   } catch (error) {
     console.error('Error fetching reports:', error)
     return []
@@ -96,11 +62,10 @@ export async function getReportList(language) {
 }
 
 export async function getLanguagesCode() {
-  const storyblokApi = useStoryblokApi()
-
   try {
-    const { data } = await storyblokApi.get('cdn/spaces/me')
-    return data.space.language_codes
+    const languagesData = await import('../data/languages.json')
+    const languages = languagesData.default || languagesData
+    return languages.supported || []
   } catch (error) {
     console.error('Error fetching languages:', error)
     return []

@@ -1,0 +1,88 @@
+---
+title: "Financial Services for Modern Investors"
+description: "Welcome to our financial services platform"
+language: en
+metatags:
+  title: "Financial Services - Your Trusted Partner"
+  description: "Transparent and innovative financial solutions for modern investors"
+  og_title: "Financial Services - Your Trusted Partner"
+  og_description: "Transparent and innovative financial solutions for modern investors"
+  twitter_title: "Financial Services - Your Trusted Partner"
+  twitter_description: "Transparent and innovative financial solutions for modern investors"
+---
+
+import Hero from '../../../components/sections/Hero.astro'
+import FeaturesSection from '../../../components/sections/FeaturesSection.astro'
+import StatsSection from '../../../components/sections/StatsSection.astro'
+import ReportsSection from '../../../components/sections/ReportsSectionWithData.astro'
+import TestimonialsSection from '../../../components/sections/TestimonialsSection.astro'
+import BannerCta from '../../../components/sections/BannerCta.astro'
+
+<Hero
+  headline="Financial Services for Modern Investors"
+  lead="We provide transparent, innovative solutions to help you achieve your financial goals."
+  image="/hero-bg.svg"
+  buttonText="Get Started"
+  buttonUrl="/"
+/>
+
+<FeaturesSection
+  title="Why Choose Us"
+  features={[
+    {
+      title: "Transparent Pricing",
+      description: "No hidden fees. Everything is clear and upfront so you know exactly what you're paying for.",
+      image: "/feature-1.jpg"
+    },
+    {
+      title: "Expert Guidance",
+      description: "Our team of experienced advisors is here to help you make informed financial decisions.",
+      image: "/feature-2.jpg"
+    },
+    {
+      title: "Innovative Solutions",
+      description: "We leverage cutting-edge technology to provide you with the best financial tools available.",
+      image: "/feature-3.jpg"
+    }
+  ]}
+/>
+
+<StatsSection
+  stats={[
+    { value: "10K+", label: "Active Clients" },
+    { value: "$2B+", label: "Assets Under Management" },
+    { value: "15+", label: "Years Experience" },
+    { value: "98%", label: "Client Satisfaction" }
+  ]}
+/>
+
+<ReportsSection
+  title="Latest Reports"
+  buttonText="View All Reports"
+  buttonUrl="/reports"
+/>
+
+<TestimonialsSection
+  title="What Our Clients Say"
+  testimonials={[
+    {
+      text: "This company has transformed the way I manage my investments. Highly recommended!",
+      author: "John Smith",
+      role: "Investor",
+      image: "/testimonial-1.jpg"
+    },
+    {
+      text: "Professional, transparent, and always available to help. Couldn't ask for more.",
+      author: "Sarah Johnson",
+      role: "Business Owner",
+      image: "/testimonial-2.jpg"
+    }
+  ]}
+/>
+
+<BannerCta
+  headline="Ready to Get Started?"
+  description="Join thousands of satisfied clients who trust us with their financial future."
+  buttonText="Become a Member"
+  buttonUrl="/"
+/>

@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content'
+import { getSiteSettings } from '../../utils/api'
+import Layout from '../../layouts/Layout.astro'
+import * as locales from '../../locales'
+import { getTransLink } from '../../utils/i18n'
+
+export async function getStaticPaths() {
+  const reports = await getCollection('reports')
+  
+  return reports.map((report) => {
+    const slug = report.id.split('/').pop().replace('.mdx', '')
+    const language = report.data.language
+    
+    return {
+      params: { slug },
+      props: { report, language },
+    }
+  })
+}
+
+const { report, language } = Astro.props
+const siteSettings = await getSiteSettings(language)
+const translate = locales[language] || locales.en
+
+// Generate language switch links
+const languages = ['en', 'es']
+let langSwitch = {}
+languages.forEach((lang) => {
+  langSwitch = {
+    ...langSwitch,
+    [lang]: lang === 'en' ? `/report/${Astro.params.slug}` : `/${lang}/report/${Astro.params.slug}`,
+  }
+})
+
+const { Content } = await report.render()
+---
+
+<Layout 
+  metatags={report.data.metatags} 
+  siteSettings={siteSettings} 
+  langSwitch={langSwitch} 
+  language={language} 
+  translate={translate}
+>
+  <main class="bg-white">
+    <article class="container mx-auto px-6 py-24">
+      <header class="max-w-3xl mx-auto mb-12">
+        <a href={getTransLink(language, '/reports')} class="inline-flex items-center gap-2 text-primary hover:underline mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M9.707 3.293a1 1 0 0 1 0 1.414L5.414 9H17a1 1 0 1 1 0 2H5.414l4.293 4.293a1 1 0 0 1-1.414 1.414l-6-6a1 1 0 0 1 0-1.414l6-6a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"/></svg>
+          {translate.returnReports}
+        </a>
+        
+        <h1 class="text-black text-4xl md:text-5xl font-adamina mb-4">{report.data.title}</h1>
+        
+        <div class="flex flex-wrap items-center gap-4 text-black opacity-65">
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path fill="currentColor" d="M8 7a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm-1-2a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm1 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"/><path fill="currentColor" fill-rule="evenodd" d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM2 8a6 6 0 1 1 12 0A6 6 0 0 1 2 8Z" clip-rule="evenodd"/></svg>
+            <span>{translate.author}: {report.data.author}</span>
+          </div>
+          <span>•</span>
+          <time datetime={report.data.date}>{new Date(report.data.date).toLocaleDateString(language)}</time>
+        </div>
+      </header>
+      
+      {report.data.image && (
+        <img 
+          src={report.data.image.src} 
+          alt={report.data.image.alt} 
+          class="w-full max-w-4xl mx-auto mb-12 rounded-lg"
+        />
+      )}
+      
+      <div class="prose prose-lg max-w-3xl mx-auto">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>

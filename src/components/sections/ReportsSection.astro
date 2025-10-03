@@ -1,0 +1,25 @@
+---
+import ReportCard from '../ReportCard.astro'
+import Button from '../Button.astro'
+const { title, reports, buttonText, buttonUrl, language } = Astro.props
+---
+
+<section class="bg-black">
+  <div class="container mx-auto px-6 py-24 flex flex-col items-center gap-16">
+    {title && <h2 class="text-white text-3xl md:text-5xl text-center leading-[120%] font-adamina mb-16 px-6">{title}</h2>}
+
+    <ul class="grid md:grid-cols-3 gap-6">
+      {reports && reports.map((report) => (
+        <li>
+          <ReportCard language={language} report={report} />
+        </li>
+      ))}
+    </ul>
+
+    {buttonText && buttonUrl && (
+      <Button href={buttonUrl}>
+        {buttonText}
+      </Button>
+    )}
+  </div>
+</section>

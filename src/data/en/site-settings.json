@@ -1,0 +1,27 @@
+{
+  "logo": {
+    "filename": "/logo.svg",
+    "alt": "Company Logo"
+  },
+  "navigation": [
+    {
+      "label": "Home",
+      "url": "/"
+    },
+    {
+      "label": "About",
+      "url": "/about"
+    },
+    {
+      "label": "Reports",
+      "url": "/reports"
+    },
+    {
+      "label": "Contact",
+      "url": "/contact"
+    }
+  ],
+  "company_description": "We are a financial services company dedicated to providing transparent and innovative solutions for modern investors.",
+  "phone": "+1 (555) 123-4567",
+  "email": "contact@company.com"
+}

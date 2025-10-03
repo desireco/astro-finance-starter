@@ -1,0 +1,88 @@
+---
+title: "Servicios Financieros para Inversores Modernos"
+description: "Bienvenido a nuestra plataforma de servicios financieros"
+language: es
+metatags:
+  title: "Servicios Financieros - Su Socio de Confianza"
+  description: "Soluciones financieras transparentes e innovadoras para inversores modernos"
+  og_title: "Servicios Financieros - Su Socio de Confianza"
+  og_description: "Soluciones financieras transparentes e innovadoras para inversores modernos"
+  twitter_title: "Servicios Financieros - Su Socio de Confianza"
+  twitter_description: "Soluciones financieras transparentes e innovadoras para inversores modernos"
+---
+
+import Hero from '../../../components/sections/Hero.astro'
+import FeaturesSection from '../../../components/sections/FeaturesSection.astro'
+import StatsSection from '../../../components/sections/StatsSection.astro'
+import ReportsSection from '../../../components/sections/ReportsSectionWithData.astro'
+import TestimonialsSection from '../../../components/sections/TestimonialsSection.astro'
+import BannerCta from '../../../components/sections/BannerCta.astro'
+
+<Hero
+  headline="Servicios Financieros para Inversores Modernos"
+  lead="Ofrecemos soluciones transparentes e innovadoras para ayudarte a alcanzar tus objetivos financieros."
+  image="/hero-bg.svg"
+  buttonText="Comenzar"
+  buttonUrl="/"
+/>
+
+<FeaturesSection
+  title="Por Qué Elegirnos"
+  features={[
+    {
+      title: "Precios Transparentes",
+      description: "Sin tarifas ocultas. Todo es claro y directo para que sepas exactamente lo que estás pagando.",
+      image: "/feature-1.jpg"
+    },
+    {
+      title: "Orientación Experta",
+      description: "Nuestro equipo de asesores experimentados está aquí para ayudarte a tomar decisiones financieras informadas.",
+      image: "/feature-2.jpg"
+    },
+    {
+      title: "Soluciones Innovadoras",
+      description: "Aprovechamos tecnología de vanguardia para proporcionarte las mejores herramientas financieras disponibles.",
+      image: "/feature-3.jpg"
+    }
+  ]}
+/>
+
+<StatsSection
+  stats={[
+    { value: "10K+", label: "Clientes Activos" },
+    { value: "$2B+", label: "Activos Bajo Gestión" },
+    { value: "15+", label: "Años de Experiencia" },
+    { value: "98%", label: "Satisfacción del Cliente" }
+  ]}
+/>
+
+<ReportsSection
+  title="Últimos Informes"
+  buttonText="Ver Todos los Informes"
+  buttonUrl="/reports"
+/>
+
+<TestimonialsSection
+  title="Lo Que Dicen Nuestros Clientes"
+  testimonials={[
+    {
+      text: "Esta empresa ha transformado la forma en que manejo mis inversiones. ¡Muy recomendado!",
+      author: "Juan García",
+      role: "Inversor",
+      image: "/testimonial-1.jpg"
+    },
+    {
+      text: "Profesional, transparente y siempre disponible para ayudar. No podría pedir más.",
+      author: "María López",
+      role: "Propietaria de Negocio",
+      image: "/testimonial-2.jpg"
+    }
+  ]}
+/>
+
+<BannerCta
+  headline="¿Listo para Comenzar?"
+  description="Únete a miles de clientes satisfechos que confían en nosotros para su futuro financiero."
+  buttonText="Hazte Miembro"
+  buttonUrl="/"
+/>

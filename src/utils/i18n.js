@@ -1,5 +1,5 @@
 import { getLanguagesCode } from '../utils/api'
-const DEFAULT_LANG = import.meta.env.STORYBLOK_DEFAULT_LANG
+const DEFAULT_LANG = import.meta.env.DEFAULT_LANG || 'en'
 
 const LANGUAGE_LABELS = {
   en: 'English',
@@ -12,11 +12,11 @@ const LANGUAGE_FLAGS = {
 }
 
 const getLanguages = async () => {
-  const storyblokLanguages = await getLanguagesCode()
+  const supportedLanguages = await getLanguagesCode()
 
   // Merge default language with other languages and remove duplicates
   return Array.from(
-    new Set([DEFAULT_LANG, ...storyblokLanguages])
+    new Set([DEFAULT_LANG, ...supportedLanguages])
   )
 }
 
