@@ -1,4 +1,16 @@
-<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="0" y="0" width="40" height="40" rx="8" fill="#1A47B8"/>
-  <text x="50" y="28" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">FINANCE</text>
+<svg width="90" height="40" viewBox="0 0 90 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Logo icon/shape -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A47B8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E7EEA;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Square icon with D -->
+  <rect x="0" y="0" width="40" height="40" rx="8" fill="url(#logoGradient)"/>
+  <text x="20" y="28" font-family="'Inter', Arial, sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">D</text>
+
+  <!-- Company name -->
+  <text x="50" y="28" font-family="'Inter', Arial, sans-serif" font-size="22" font-weight="700" fill="#1A47B8">ynC</text>
 </svg>
