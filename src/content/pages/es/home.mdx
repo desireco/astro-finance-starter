@@ -14,14 +14,14 @@ metatags:
 import Hero from '../../../components/sections/Hero.astro'
 import FeaturesSection from '../../../components/sections/FeaturesSection.astro'
 import StatsSection from '../../../components/sections/StatsSection.astro'
-import ReportsSection from '../../../components/sections/ReportsSection.astro'
+import ReportsSection from '../../../components/sections/ReportsSectionWithData.astro'
 import TestimonialsSection from '../../../components/sections/TestimonialsSection.astro'
 import BannerCta from '../../../components/sections/BannerCta.astro'
 
 <Hero
   headline="Servicios Financieros para Inversores Modernos"
   lead="Ofrecemos soluciones transparentes e innovadoras para ayudarte a alcanzar tus objetivos financieros."
-  image="/hero-bg.jpg"
+  image="/hero-bg.svg"
   buttonText="Comenzar"
   buttonUrl="/"
 />
@@ -54,6 +54,12 @@ import BannerCta from '../../../components/sections/BannerCta.astro'
     { value: "15+", label: "Años de Experiencia" },
     { value: "98%", label: "Satisfacción del Cliente" }
   ]}
+/>
+
+<ReportsSection
+  title="Últimos Informes"
+  buttonText="Ver Todos los Informes"
+  buttonUrl="/reports"
 />
 
 <TestimonialsSection

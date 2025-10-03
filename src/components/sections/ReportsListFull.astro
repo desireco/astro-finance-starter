@@ -1,0 +1,25 @@
+---
+import { getReportList } from '../../utils/api'
+import ReportCard from '../ReportCard.astro'
+
+const { title, description } = Astro.props
+const language = Astro.props.language || 'en'
+const reports = await getReportList(language)
+---
+
+<section class="bg-black min-h-screen">
+  <div class="container mx-auto px-6 py-24">
+    <div class="text-center mb-16">
+      {title && <h1 class="text-white text-4xl md:text-6xl leading-[120%] font-adamina mb-6">{title}</h1>}
+      {description && <p class="text-white text-lg opacity-80 max-w-2xl mx-auto">{description}</p>}
+    </div>
+
+    <ul class="grid md:grid-cols-3 gap-6">
+      {reports && reports.map((report) => (
+        <li>
+          <ReportCard language={language} report={report} />
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

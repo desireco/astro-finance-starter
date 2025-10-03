@@ -1,0 +1,33 @@
+---
+import { getReportList } from '../../utils/api'
+import ReportCard from '../ReportCard.astro'
+import Button from '../Button.astro'
+
+const { title, buttonText, buttonUrl } = Astro.props
+// Get language from the page context - we'll need to pass this down
+const language = Astro.props.language || 'en'
+const reports = await getReportList(language)
+
+// Limit to 3 reports for the homepage
+const displayReports = reports.slice(0, 3)
+---
+
+<section class="bg-black">
+  <div class="container mx-auto px-6 py-24 flex flex-col items-center gap-16">
+    {title && <h2 class="text-white text-3xl md:text-5xl text-center leading-[120%] font-adamina mb-16 px-6">{title}</h2>}
+
+    <ul class="grid md:grid-cols-3 gap-6">
+      {displayReports && displayReports.map((report) => (
+        <li>
+          <ReportCard language={language} report={report} />
+        </li>
+      ))}
+    </ul>
+
+    {buttonText && buttonUrl && (
+      <Button href={buttonUrl}>
+        {buttonText}
+      </Button>
+    )}
+  </div>
+</section>

@@ -43,44 +43,82 @@ This template is powered by a modern, headless stack: Astro, Storyblok, Netlify,
 ## Local Setup
 
 ### Prerequisites
-- Node.js
-- Bun
+- Node.js (v18 or higher)
 
 ### Getting Started
 ```bash
 # Install dependencies
-bun install
+npm install
 
-# Set up environment variables
+# Set up environment variables (optional)
 cp .env.example .env
 ```
 
 ### Environment Variables
 ```bash
-STORYBLOK_TOKEN=        # Storyblok API token (Project Settings > Access token)
-STORYBLOK_IS_PREVIEW=   # "yes" for preview mode
-STORYBLOK_ENVIRONMENT=  # set to development on your local machine
-STORYBLOK_DEFAULT_LANG= # Default site language code, like en or es
-PUBLIC_POSTHOG_TOKEN=   # PostHog API key (Project Settings > Project ID)
+DEFAULT_LANG=en          # Default site language code (en or es)
+PUBLIC_POSTHOG_TOKEN=    # PostHog API key (optional, for A/B testing)
 ```
 
 ## Available Scripts
 ```bash
 # Run development server
-bun dev
+npm run dev
 
 # Build for production
-bun run build
+npm run build
 
 # Preview production build
-bun run preview
+npm run preview
 ```
+
+## Content Structure
+
+### Pages
+Pages are stored in `src/content/pages/` organized by language:
+- `src/content/pages/en/` - English pages
+- `src/content/pages/es/` - Spanish pages
+
+Each page is an MDX file that can import and use Astro components.
+
+### Reports
+Reports are stored in `src/content/reports/` organized by language:
+- `src/content/reports/en/` - English reports
+- `src/content/reports/es/` - Spanish reports
+
+### Site Settings
+Site-wide settings are in `src/data/` organized by language:
+- `src/data/en/site-settings.json` - English site settings (logo, navigation, etc.)
+- `src/data/es/site-settings.json` - Spanish site settings
+- `src/data/colors.json` - Theme colors
+- `src/data/languages.json` - Supported languages
+
+## Adding Content
+
+### Adding a New Page
+1. Create an MDX file in `src/content/pages/en/` (and `es/` for Spanish)
+2. Add frontmatter with title, description, language, and metadata
+3. Import and use components in the MDX content
+4. The page will automatically be generated at build time
+
+### Adding a New Report
+1. Create an MDX file in `src/content/reports/en/` (and `es/` for Spanish)
+2. Add frontmatter with title, description, author, date, and image
+3. Write your report content in MDX
+4. The report will be available at `/report/{slug}`
+
+### Modifying Navigation
+Edit the navigation array in `src/data/{language}/site-settings.json`
+
+## Multilingual Support
+
+This template supports multiple languages out of the box. To add a new language:
+
+1. Add the language code to `src/data/languages.json`
+2. Create site settings file: `src/data/{lang}/site-settings.json`
+3. Add translations to `src/locales/{lang}.json`
+4. Add language flag SVG to `src/utils/i18n.js`
+5. Create content in `src/content/pages/{lang}/` and `src/content/reports/{lang}/`
 
 ## Contributing
 Contributions are welcome!
-
-## 📸 Screenshots
-![Financial Template Preview](https://a.storyblok.com/f/286134095425736/3840x2160/0da3abc8e2/2.png)
-![Financial Template Preview](https://a.storyblok.com/f/286134095425736/3840x2160/70e9404911/4.png)
-![Financial Template Preview](https://a.storyblok.com/f/286134095425736/3840x2160/9913515548/5.png)
-![Financial Template Preview](https://a.storyblok.com/f/286134095425736/3840x2160/10957f2691/3.png)
