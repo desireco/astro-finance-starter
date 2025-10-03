@@ -5,7 +5,7 @@ const pagesCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
-    language: z.enum(['en', 'es']),
+    language: z.enum(['en', 'es', 'pt', 'fr', 'pl', 'de']),
     metatags: z.object({
       title: z.string().optional(),
       description: z.string().optional(),
@@ -26,7 +26,7 @@ const reportsCollection = defineCollection({
     description: z.string(),
     author: z.string(),
     date: z.string(),
-    language: z.enum(['en', 'es']),
+    language: z.enum(['en', 'es', 'pt', 'fr', 'pl', 'de']),
     image: z.object({
       src: z.string(),
       alt: z.string(),
@@ -46,5 +46,5 @@ const reportsCollection = defineCollection({
 
 export const collections = {
   pages: pagesCollection,
-  reports: reportsCollection,
+  journal: reportsCollection,
 };

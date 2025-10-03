@@ -1,4 +1,4 @@
 {
-  "supported": ["en", "es"],
+  "supported": ["en", "es", "pt", "fr", "pl", "de"],
   "default": "en"
 }

@@ -51,7 +51,7 @@ export async function getDatasource(slug) {
 
 export async function getReportList(language) {
   try {
-    const reports = await getCollection('reports', ({ data }) => {
+    const reports = await getCollection('journal', ({ data }) => {
       return data.language === language
     })
     return reports

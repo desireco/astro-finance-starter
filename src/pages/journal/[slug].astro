@@ -6,7 +6,7 @@ import * as locales from '../../locales'
 import { getTransLink } from '../../utils/i18n'
 
 export async function getStaticPaths() {
-  const reports = await getCollection('reports')
+  const reports = await getCollection('journal')
   
   return reports.map((report) => {
     const slug = report.id.split('/').pop().replace('.mdx', '')
@@ -24,12 +24,12 @@ const siteSettings = await getSiteSettings(language)
 const translate = locales[language] || locales.en
 
 // Generate language switch links
-const languages = ['en', 'es']
+const languages = ['en', 'es', 'pt', 'fr', 'pl', 'de']
 let langSwitch = {}
 languages.forEach((lang) => {
   langSwitch = {
     ...langSwitch,
-    [lang]: lang === 'en' ? `/report/${Astro.params.slug}` : `/${lang}/report/${Astro.params.slug}`,
+    [lang]: lang === 'en' ? `/journal/${Astro.params.slug}` : `/${lang}/journal/${Astro.params.slug}`,
   }
 })
 
@@ -46,9 +46,9 @@ const { Content } = await report.render()
   <main class="bg-white">
     <article class="container mx-auto px-6 py-24">
       <header class="max-w-3xl mx-auto mb-12">
-        <a href={getTransLink(language, '/reports')} class="inline-flex items-center gap-2 text-primary hover:underline mb-6">
+        <a href={getTransLink(language, '/journal')} class="inline-flex items-center gap-2 text-primary hover:underline mb-6">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M9.707 3.293a1 1 0 0 1 0 1.414L5.414 9H17a1 1 0 1 1 0 2H5.414l4.293 4.293a1 1 0 0 1-1.414 1.414l-6-6a1 1 0 0 1 0-1.414l6-6a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"/></svg>
-          {translate.returnReports}
+          Back to Journal
         </a>
         
         <h1 class="text-black text-4xl md:text-5xl font-adamina mb-4">{report.data.title}</h1>

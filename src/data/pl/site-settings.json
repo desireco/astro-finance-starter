@@ -1,0 +1,27 @@
+{
+  "logo": {
+    "filename": "/logo.svg",
+    "alt": "Dynamic Checkout Logo"
+  },
+  "navigation": [
+    {
+      "label": "Strona główna",
+      "url": "/"
+    },
+    {
+      "label": "O nas",
+      "url": "/about"
+    },
+    {
+      "label": "Dziennik",
+      "url": "/journal"
+    },
+    {
+      "label": "Kontakt",
+      "url": "/contact"
+    }
+  ],
+  "company_description": "Jesteśmy firmą usług finansowych dedykowaną dostarczaniu transparentnych i innowacyjnych rozwiązań dla nowoczesnych inwestorów.",
+  "phone": "+1 (555) 123-4567",
+  "email": "kontakt@firma.com"
+}
